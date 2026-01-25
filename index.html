@@ -7,15 +7,22 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* Background floating hearts */
+    body {
+    position: relative;
+    overflow: hidden;
+    }
+
     body::before,
     body::after {
-      content: "💕";
-      position: absolute;
-      font-size: 30px;
-      opacity: 0.1;
-      animation: float 20s infinite ease-in-out;
-      pointer-events: none;
+        position: absolute;
+        font-size: 30px;
+        opacity: 0.2; /* slightly more visible */
+        pointer-events: none;
+        animation: float 20s infinite ease-in-out;
+        content: "💕";
+        z-index: 0;
     }
+
     body::before {
       top: 10%;
       left: 15%;
@@ -26,6 +33,28 @@
       right: 20%;
       animation-delay: -10s;
     }
+
+    .heart-float {
+        position: absolute;
+        font-size: 30px;
+        opacity: 0.2;
+        pointer-events: none;
+        animation: float 20s infinite ease-in-out;
+        z-index: 5;
+    }
+
+    .heart-float::before {
+        content: "💕";
+    }
+
+
+    body .heart-float:nth-of-type(1) { top: 90%; left: 30%; animation-delay: -2s; }
+    body .heart-float:nth-of-type(2) { top: 20%; left: 70%; animation-delay: -7s; }
+    body .heart-float:nth-of-type(3) { top: 50%; left: 40%; animation-delay: -12s; }
+    body .heart-float:nth-of-type(4) { top: 60%; left: 10%; animation-delay: -4s; }
+    body .heart-float:nth-of-type(5) { top: 30%; left: 35%; animation-delay: -9s; }
+    body .heart-float:nth-of-type(6) { top: 84%; left: 85%; animation-delay: -9s; }
+
     @keyframes float {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-30px) rotate(10deg); }
@@ -112,7 +141,7 @@
       position: absolute;
       left: 50%;
       bottom: 0;
-      width: 260px;
+      width: 280px;
       height: 200px; /* initially same as envelope */
       background: #fff;
       transform: translateX(-50%);
@@ -220,7 +249,16 @@
   </style>
 </head>
 <body class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-100 to-pink-200 overflow-hidden">
+    <div class="heart-float"></div>
+    <div class="heart-float"></div>
+    <div class="heart-float"></div>
+    <div class="heart-float"></div>
+    <div class="heart-float"></div>
+    <div class="heart-float"></div>
+
+
   <div class="relative w-[320px] h-[420px] perspective">
+
     <!-- Envelope -->
     <div id="envelope" class="envelope relative w-full h-[200px] mt-[160px]">
       <!-- Letter INSIDE envelope -->
