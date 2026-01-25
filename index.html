@@ -4,39 +4,238 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Valentine Envelope</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Background floating hearts */
+    body::before,
+    body::after {
+      content: "💕";
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.1;
+      animation: float 20s infinite ease-in-out;
+      pointer-events: none;
+    }
+    body::before {
+      top: 10%;
+      left: 15%;
+      animation-delay: -5s;
+    }
+    body::after {
+      top: 70%;
+      right: 20%;
+      animation-delay: -10s;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+    }
+
+    /* Perspective */
+    .perspective {
+      perspective: 1200px;
+    }
+
+    /* Envelope */
+    .envelope {
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(.22,.61,.36,1);
+    }
+
+    /* Envelope slides down when open */
+    .envelope.open {
+      transform: translateY(100px);
+    }
+
+    /* Envelope body */
+    .body {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #5b0f1b, #7a1426);
+      border-radius: 6px;
+      z-index: 2;
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,0.08),
+        0 20px 40px rgba(0,0,0,0.35);
+    }
+
+    /* Flap */
+    .flap {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #6d1324, #4a0c17);
+      clip-path: polygon(0 0, 50% 55%, 100% 0);
+      transform-origin: top center;
+      transform: rotateX(0deg);
+      transition: transform 0.8s cubic-bezier(.22,.61,.36,1), z-index 0s;
+      z-index: 4;
+      transform-style: preserve-3d;
+    }
+
+    /* Flap opens when envelope is open */
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+      transition: transform 0.5s cubic-bezier(.22,.61,.36,1), z-index 0s 0.4s;
+    }
+
+    /* Letter */
+    .letter {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 260px;
+      height: 320px;
+      background: #fff;
+      transform: translate(-50%, 180px);
+      transition: transform 1s cubic-bezier(.22,.61,.36,1) 0.5s;
+      z-index: 2;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Letter slides up when envelope opens */
+    .envelope.open .letter {
+      transform: translate(-50%, -80px) ;
+    }
+
+    .letter-inner {
+      padding: 28px;
+      text-align: center;
+      font-family: "Georgia", serif;
+      color: #333;
+      background:
+        linear-gradient(#fff, #f9f9f9),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0,0,0,0.015),
+          rgba(0,0,0,0.015) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .letter h1 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    /* Heart seal */
+    .heart {
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      width: 56px;
+      height: 56px;
+      background: #ff1744;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      cursor: pointer;
+      z-index: 5;
+      animation: pulse 1.5s ease-in-out infinite;
+      box-shadow: 0 6px 18px rgba(255,23,68,0.45);
+      border: none;
+      outline: none;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      background: #ff1744;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -28px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 28px;
+      top: 0;
+    }
+
+    /* Heart animations */
+    .heart.clicked {
+      animation: heartBounce 0.8s cubic-bezier(.36,.07,.19,.97) forwards;
+    }
+
+    @keyframes heartBounce {
+      0% {
+        transform: translate(-50%, -50%) rotate(-45deg) translateY(0) scale(1);
+        opacity: 1;
+      }
+      35% {
+        transform: translate(-50%, -50%) rotate(-45deg) translateY(-50px) scale(1.1);
+        opacity: 1;
+      }
+      50% {
+        transform: translate(-50%, -50%) rotate(-45deg) translateY(-50px) scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(-45deg) translateY(30px) scale(0.8);
+        opacity: 0;
+      }
+    }
+
+    /* Pulse animation */
+    @keyframes pulse {
+      0%, 100% { 
+        transform: translate(-50%, -50%) rotate(-45deg) scale(1); 
+      }
+      50% { 
+        transform: translate(-50%, -50%) rotate(-45deg) scale(1.12); 
+      }
+    }
+  </style>
 </head>
-
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-100 to-pink-200 overflow-hidden">
-
+<body class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-100 to-pink-200 overflow-hidden">
   <div class="relative w-[320px] h-[420px] perspective">
-
     <!-- Envelope -->
-    <div id="envelope" class="envelope relative w-full h-[200px] mt-[160px] overflow-hidden">
-
+    <div id="envelope" class="envelope relative w-full h-[200px] mt-[160px]">
       <!-- Letter INSIDE envelope -->
       <div id="letter" class="letter">
         <div class="letter-inner">
-          <h1>💕</h1>
           <p>Will you be my Valentine?</p>
         </div>
       </div>
-
       <!-- Envelope body -->
       <div class="body"></div>
-
       <!-- Top flap -->
       <div class="flap"></div>
-
       <!-- Heart seal -->
       <button id="heart" class="heart"></button>
-
     </div>
-
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const envelope = document.getElementById("envelope");
+    const heart = document.getElementById("heart");
+    let opened = false;
+
+    heart.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (opened) return;
+      opened = true;
+      
+      // Step 1: Start heart bounce animation
+      heart.classList.add("clicked");
+      
+      // Step 2: Open envelope (flap + letter) slightly after heart starts bouncing
+      setTimeout(() => {
+        envelope.classList.add("open");
+      }, 300);
+      
+      // Step 3: Remove heart from DOM after animation completes
+      setTimeout(() => {
+        heart.style.pointerEvents = "none";
+      }, 800);
+    });
+  </script>
 </body>
 </html>
