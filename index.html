@@ -40,7 +40,6 @@
     .envelope {
       transform-style: preserve-3d;
       transition: transform 0.8s cubic-bezier(.22,.61,.36,1);
-
     }
 
     /* Envelope slides down when open */
@@ -60,42 +59,34 @@
         0 20px 40px rgba(0,0,0,0.35);
     }
 
-    /* Inner envelope side triangles (right-angle folds) */
-    /* Inner envelope side triangles (right-angle folds spanning full width) */
+    /* Inner envelope side triangles */
     .inner-left,
     .inner-right {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(135deg, #6a1223, #4f0d19);
-    z-index: 3;
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(135deg, #6a1223, #4f0d19);
+      z-index: 3;
     }
 
-    /* Left inner fold:
-    - Right angle at bottom-left
-    - Hypotenuse goes to bottom-right of envelope */
     .inner-left {
-    left: 0;
-    clip-path: polygon(
-        0% 100%,   /* bottom-left (right angle) */
-        0% 0%,     /* top-left */
-        200% 100%  /* reaches bottom-right of envelope */
-    );
+      left: 0;
+      clip-path: polygon(
+        0% 100%,
+        0% 0%,
+        200% 100%
+      );
     }
 
-    /* Right inner fold:
-    - Right angle at bottom-right
-    - Hypotenuse goes to bottom-left of envelope */
     .inner-right {
-    right: 0;
-    clip-path: polygon(
-        100% 100%, /* bottom-right (right angle) */
-        -100% 100%,/* reaches bottom-left of envelope */
-        100% 0%    /* top-right */
-    );
+      right: 0;
+      clip-path: polygon(
+        100% 100%,
+        -100% 100%,
+        100% 0%
+      );
     }
-
 
     /* Flap */
     .flap {
@@ -105,16 +96,15 @@
       clip-path: polygon(0 0, 50% 55%, 100% 0);
       transform-origin: top center;
       transform: rotateX(0deg);
-      transition: transform 0.8s cubic-bezier(.22,.61,.36,1), z-index 0s;
+      transition: transform 2s cubic-bezier(.22,.61,.36,1);
       z-index: 4;
       transform-style: preserve-3d;
     }
 
-    /* Flap opens when envelope is open */
     .envelope.open .flap {
       transform: rotateX(180deg);
       z-index: 1;
-      transition: transform 0.6s cubic-bezier(.22,.61,.36,1), z-index 1s 0.1s;
+      transition: transform 1s cubic-bezier(.22,.61,.36,1), z-index 1s 0.1s;
     }
 
     /* Letter */
@@ -123,18 +113,18 @@
       left: 50%;
       bottom: 0;
       width: 260px;
-      height: 350px;
+      height: 200px; /* initially same as envelope */
       background: #fff;
-      transform: translate(-50%, 180px);
-      transition: transform 4s cubic-bezier(.22,.61,.36,1) 0.8s;
+      transform: translateX(-50%);
+      transition: height 2.5s cubic-bezier(.22,.61,.36,1) 1s;
       z-index: 2;
       border-radius: 4px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden; /* hide extra text until letter grows */
     }
 
-    /* Letter slides up when envelope opens */
     .envelope.open .letter {
-      transform: translate(-50%, -80px) ;
+      height: 450px; /* full letter height */
     }
 
     .letter-inner {
@@ -142,17 +132,16 @@
       text-align: center;
       font-family: "Georgia", serif;
       color: #333;
-      background:
-        linear-gradient(#fff, #f9f9f9),
-        repeating-linear-gradient(
-          0deg,
-          rgba(0,0,0,0.015),
-          rgba(0,0,0,0.015) 1px,
-          transparent 1px,
-          transparent 3px
-        );
       height: 100%;
-      border-radius: 4px;
+      overflow: hidden;
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .envelope.open .letter-inner {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .letter h1 {
@@ -197,9 +186,8 @@
       top: 0;
     }
 
-    /* Heart animations */
     .heart.clicked {
-      animation: heartBounce 0.9s cubic-bezier(.36,.07,.19,.97) forwards;
+      animation: heartBounce 1.5s cubic-bezier(.36,.07,.19,.97) forwards;
     }
 
     @keyframes heartBounce {
@@ -221,7 +209,6 @@
       }
     }
 
-    /* Pulse animation */
     @keyframes pulse {
       0%, 100% { 
         transform: translate(-50%, -50%) rotate(-45deg) scale(1); 
@@ -239,7 +226,8 @@
       <!-- Letter INSIDE envelope -->
       <div id="letter" class="letter">
         <div class="letter-inner">
-          <p>Will you be my Valentine?</p>
+          <h1>Will you be my Valentine?</h1>
+          <p>I’ve been waiting for the perfect moment to tell you…</p>
         </div>
       </div>
       <!-- Envelope body -->
@@ -273,7 +261,7 @@
         envelope.classList.add("open");
       }, 300);
       
-      // Step 3: Remove heart from DOM after animation completes
+      // Step 3: Disable heart after animation
       setTimeout(() => {
         heart.style.pointerEvents = "none";
       }, 800);
