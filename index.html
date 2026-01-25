@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentine Envelope</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-100 to-pink-200 overflow-hidden">
+
+  <div class="relative w-[320px] h-[420px] perspective">
+
+    <!-- Envelope -->
+    <div id="envelope" class="envelope relative w-full h-[200px] mt-[160px] overflow-hidden">
+
+      <!-- Letter INSIDE envelope -->
+      <div id="letter" class="letter">
+        <div class="letter-inner">
+          <h1>💕</h1>
+          <p>Will you be my Valentine?</p>
+        </div>
+      </div>
+
+      <!-- Envelope body -->
+      <div class="body"></div>
+
+      <!-- Top flap -->
+      <div class="flap"></div>
+
+      <!-- Heart seal -->
+      <button id="heart" class="heart"></button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
