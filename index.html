@@ -53,11 +53,48 @@
       inset: 0;
       background: linear-gradient(135deg, #5b0f1b, #7a1426);
       border-radius: 6px;
-      z-index: 2;
+      z-index: 1;
       box-shadow:
         inset 0 0 0 2px rgba(255,255,255,0.08),
         0 20px 40px rgba(0,0,0,0.35);
     }
+
+    /* Inner envelope side triangles (right-angle folds) */
+    /* Inner envelope side triangles (right-angle folds spanning full width) */
+    .inner-left,
+    .inner-right {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, #6a1223, #4f0d19);
+    z-index: 3;
+    }
+
+    /* Left inner fold:
+    - Right angle at bottom-left
+    - Hypotenuse goes to bottom-right of envelope */
+    .inner-left {
+    left: 0;
+    clip-path: polygon(
+        0% 100%,   /* bottom-left (right angle) */
+        0% 0%,     /* top-left */
+        200% 100%  /* reaches bottom-right of envelope */
+    );
+    }
+
+    /* Right inner fold:
+    - Right angle at bottom-right
+    - Hypotenuse goes to bottom-left of envelope */
+    .inner-right {
+    right: 0;
+    clip-path: polygon(
+        100% 100%, /* bottom-right (right angle) */
+        -100% 100%,/* reaches bottom-left of envelope */
+        100% 0%    /* top-right */
+    );
+    }
+
 
     /* Flap */
     .flap {
@@ -76,7 +113,7 @@
     .envelope.open .flap {
       transform: rotateX(180deg);
       z-index: 1;
-      transition: transform 0.5s cubic-bezier(.22,.61,.36,1), z-index 0s 0.4s;
+      transition: transform 0.6s cubic-bezier(.22,.61,.36,1), z-index 1s 0.1s;
     }
 
     /* Letter */
@@ -85,10 +122,10 @@
       left: 50%;
       bottom: 0;
       width: 260px;
-      height: 320px;
+      height: 350px;
       background: #fff;
       transform: translate(-50%, 180px);
-      transition: transform 1s cubic-bezier(.22,.61,.36,1) 0.5s;
+      transition: transform 4s cubic-bezier(.22,.61,.36,1) 0.5s;
       z-index: 2;
       border-radius: 4px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -161,7 +198,7 @@
 
     /* Heart animations */
     .heart.clicked {
-      animation: heartBounce 0.8s cubic-bezier(.36,.07,.19,.97) forwards;
+      animation: heartBounce 0.9s cubic-bezier(.36,.07,.19,.97) forwards;
     }
 
     @keyframes heartBounce {
@@ -206,6 +243,10 @@
       </div>
       <!-- Envelope body -->
       <div class="body"></div>
+
+      <div class="inner-left"></div>
+      <div class="inner-right"></div>
+
       <!-- Top flap -->
       <div class="flap"></div>
       <!-- Heart seal -->
