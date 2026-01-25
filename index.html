@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Valentine Envelope</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Allura&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Felipa&display=swap" rel="stylesheet">
   <style>
     /* Background floating hearts */
     body {
@@ -158,8 +162,10 @@
 
     .letter-inner {
       padding: 28px;
-      text-align: center;
-      font-family: "Georgia", serif;
+      text-align: left;
+      font-family: "Felipa", serif;
+      font-size: 18px;
+      line-height: 1.6;
       color: #333;
       height: 100%;
       overflow: hidden;
@@ -168,14 +174,21 @@
       transition: none;
     }
 
+    .letter-inner p:last-child,
+    .letter-inner p:nth-last-child(2) {
+        text-align: center;
+        margin-top: 8px; /* optional spacing */
+    }
+
     .envelope.open .letter-inner {
       opacity: 1;
       transform: translateY(0);
     }
 
     .letter h1 {
-      font-size: 28px;
-      margin-bottom: 16px;
+      font-family: "Felipa", serif;
+      font-size: 24px;
+      margin-bottom: 18px;
     }
 
     /* Heart seal */
@@ -264,8 +277,12 @@
       <!-- Letter INSIDE envelope -->
       <div id="letter" class="letter">
         <div class="letter-inner">
-          <h1>Will you be my Valentine?</h1>
-          <p>I’ve been waiting for the perfect moment to tell you…</p>
+          <h1>To my dearest Leo,</h1>
+          <p>Never have I seen a woman with a prettier soul. All my roads lead to you, even the ones I took to forget you.</p>
+          <p>Happy valentines sweetheart,</p>
+          <p>I appreciate you being in my life.</p>
+          <p>Yours forever,</p>
+          <p>I</p>
         </div>
       </div>
       <!-- Envelope body -->
