@@ -54,9 +54,9 @@
 
     body .heart-float:nth-of-type(1) { top: 90%; left: 30%; animation-delay: -2s; }
     body .heart-float:nth-of-type(2) { top: 20%; left: 70%; animation-delay: -7s; }
-    body .heart-float:nth-of-type(3) { top: 50%; left: 40%; animation-delay: -12s; }
+    body .heart-float:nth-of-type(3) { top: 50%; left: 40%; animation-delay: -5s; }
     body .heart-float:nth-of-type(4) { top: 60%; left: 10%; animation-delay: -4s; }
-    body .heart-float:nth-of-type(5) { top: 30%; left: 35%; animation-delay: -9s; }
+    body .heart-float:nth-of-type(5) { top: 30%; left: 35%; animation-delay: -6s; }
     body .heart-float:nth-of-type(6) { top: 84%; left: 85%; animation-delay: -9s; }
 
     @keyframes float {
@@ -77,7 +77,7 @@
 
     /* Envelope slides down when open */
     .envelope.open {
-      transform: translateY(100px);
+      transform: translateY(120px);
     }
 
     /* Envelope body */
@@ -147,7 +147,7 @@
       bottom: 0;
       width: 280px;
       height: 200px; /* initially same as envelope */
-      background: #fff;
+      background: #faf4f4;
       transform: translateX(-50%);
       transition: height 2.5s cubic-bezier(.22,.61,.36,1) 1s;
       z-index: 2;
@@ -157,11 +157,11 @@
     }
 
     .envelope.open .letter {
-      height: 450px; /* full letter height */
+      height: 480px; /* full letter height */
     }
 
     .letter-inner {
-      padding: 32px;
+      padding: 20px;
       text-align: justify;
       font-family: "Felipa", serif;
       font-size: 19px;
@@ -277,8 +277,8 @@
       <!-- Letter INSIDE envelope -->
       <div id="letter" class="letter">
         <div class="letter-inner">
-          <h1>To my dearest Leo,</h1>
-          <p>Never have I seen a woman with a prettier soul. All my roads lead to you, even the ones I took to forget you.</p>
+          <h1>To my dearest Leora,</h1>
+          <p>Never have I seen a woman with a prettier soul. All my roads lead to you and there's not enough words in existence to describe how much I adore you.</p>
           <p>Happy valentines sweetheart,</p>
           <p>I appreciate you being in my life.</p>
           <p>Yours forever,</p>
