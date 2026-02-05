@@ -16,48 +16,27 @@
     overflow: hidden;
     }
 
-    body::before,
-    body::after {
-        position: absolute;
-        font-size: 30px;
-        opacity: 0.2; 
-        pointer-events: none;
-        animation: float 20s infinite ease-in-out;
-        content: "💕";
-        z-index: 5;
-    }
-
-    body::before {
-      top: 10%;
-      left: 15%;
-      animation-delay: -5s;
-    }
-    body::after {
-      top: 70%;
-      right: 20%;
-      animation-delay: -10s;
-    }
-
     .heart-float {
         position: absolute;
-        font-size: 30px;
+        width: 300px; /* control size here */
+        height: 300px;
         opacity: 0.2;
         pointer-events: none;
         animation: float 20s infinite ease-in-out;
         z-index: 0;
-    }
-
-    .heart-float::before {
-        content: "💕";
+        object-fit: contain;
     }
 
 
-    body .heart-float:nth-of-type(1) { top: 90%; left: 30%; animation-delay: -2s; }
-    body .heart-float:nth-of-type(2) { top: 20%; left: 70%; animation-delay: -7s; }
-    body .heart-float:nth-of-type(3) { top: 50%; left: 40%; animation-delay: -5s; }
-    body .heart-float:nth-of-type(4) { top: 60%; left: 10%; animation-delay: -4s; }
-    body .heart-float:nth-of-type(5) { top: 30%; left: 35%; animation-delay: -6s; }
-    body .heart-float:nth-of-type(6) { top: 84%; left: 85%; animation-delay: -9s; }
+    body .heart-float:nth-of-type(1) { top: 70%; left: 40%; animation-delay: -2s; }
+    body .heart-float:nth-of-type(2) { top: 5%; left: 60%; animation-delay: -7s; }
+    body .heart-float:nth-of-type(3) { top: 40%; left: 15%; animation-delay: -5s; }
+    body .heart-float:nth-of-type(4) { top: 60%; left: 5%; animation-delay: -4s; }
+    body .heart-float:nth-of-type(5) { top: 10%; left: 35%; animation-delay: -6s; }
+    body .heart-float:nth-of-type(6) { top: 64%; left: 65%; animation-delay: -9s; }
+    body .heart-float:nth-of-type(7) { top: 5%; left: 10%; animation-delay: -3s; }
+    body .heart-float:nth-of-type(8) { top: 40%; left: 70%; animation-delay: -8s; }
+
 
     @keyframes float {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -166,7 +145,7 @@
       font-family: "Felipa", serif;
       font-size: 19px;
       line-height: 1.6;
-      color: #333;
+      color: #471c1c;
       height: 100%;
       overflow: hidden;
       opacity: 1;
@@ -262,12 +241,14 @@
   </style>
 </head>
 <body class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-100 to-pink-200 overflow-hidden">
-    <div class="heart-float"></div>
-    <div class="heart-float"></div>
-    <div class="heart-float"></div>
-    <div class="heart-float"></div>
-    <div class="heart-float"></div>
-    <div class="heart-float"></div>
+    <img src="assets/lily-watermark.png" class="heart-float">
+    <img src="assets/lily-watermark.png" class="heart-float">
+    <img src="assets/lily-watermark.png" class="heart-float">
+    <img src="assets/lily-watermark.png" class="heart-float">
+    <img src="assets/lily-watermark.png" class="heart-float">
+    <img src="assets/lily-watermark.png" class="heart-float">
+    <img src="assets/lily-watermark.png" class="heart-float">
+    <img src="assets/lily-watermark.png" class="heart-float">
 
 
   <div class="relative w-[330px] h-[420px] perspective">
@@ -278,7 +259,7 @@
       <div id="letter" class="letter">
         <div class="letter-inner">
           <h1>To my dearest Leora,</h1>
-          <p>Never have I seen a woman with a prettier soul. All my roads lead to you and there's not enough words in existence to describe how much I adore you. No distance too big, no time too long to wait for you.</p>
+          <p>Never have I seen a woman with a prettier soul. All my roads lead to you and there's not enough words in existence to describe how much light you bring to life. No distance too big, no time too long to wait for you.</p>
           <p>Happy valentines sweetheart,</p>
           <p>I appreciate you being in my life.</p>
           <p>Yours forever,</p>
